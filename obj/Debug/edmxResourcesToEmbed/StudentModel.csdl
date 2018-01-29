@@ -1,0 +1,321 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Programing_StudentModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="gender_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Mentors" Relationship="Self.FK_Mentors_To_Gender" FromRole="Gender" ToRole="Mentors" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Students_To_Gender" FromRole="Gender" ToRole="Students" />
+    <NavigationProperty Name="Teachers" Relationship="Self.FK_Teacher_To_Gender" FromRole="Gender" ToRole="Teacher" />
+  </EntityType>
+  <EntityType Name="Group_Schedule">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="group_schedule_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="group_begin_time" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="group_end_time" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Group_Types" Relationship="Self.FK_Group_Types_To_Schedule" FromRole="Group_Schedule" ToRole="Group_Types" />
+  </EntityType>
+  <EntityType Name="Group_Types">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="group_type_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="group_schedule_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Group_Schedule" Relationship="Self.FK_Group_Types_To_Schedule" FromRole="Group_Types" ToRole="Group_Schedule" />
+    <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_To_Group_Types" FromRole="Group_Types" ToRole="Groups" />
+  </EntityType>
+  <EntityType Name="Group">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="group_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="group_type_id" Type="Int32" Nullable="false" />
+    <Property Name="group_teacher_id" Type="Int32" Nullable="false" />
+    <Property Name="group_mentor_id" Type="Int32" Nullable="false" />
+    <Property Name="group_start_date" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Group_Types" Relationship="Self.FK_Groups_To_Group_Types" FromRole="Groups" ToRole="Group_Types" />
+    <NavigationProperty Name="Teacher" Relationship="Self.FK_Groups_To_Teacher" FromRole="Groups" ToRole="Teacher" />
+    <NavigationProperty Name="Mentor" Relationship="Self.FK_Groups_ToTable" FromRole="Groups" ToRole="Mentors" />
+    <NavigationProperty Name="Students" Relationship="Self.FK_Students_To_Group" FromRole="Groups" ToRole="Students" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_To_Group" FromRole="Groups" ToRole="Tasks" />
+  </EntityType>
+  <EntityType Name="Mentor">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="mentor_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mentor_surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mentor_email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mentor_photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="mentor_info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="mentor_gender_id" Type="Int32" Nullable="false" />
+    <Property Name="mentor_password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Gender" Relationship="Self.FK_Mentors_To_Gender" FromRole="Mentors" ToRole="Gender" />
+    <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_ToTable" FromRole="Mentors" ToRole="Groups" />
+  </EntityType>
+  <EntityType Name="Setting">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="screen_status" Type="Boolean" />
+    <Property Name="back_color" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="Student">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="student_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="student_surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="student_email" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="student_phone" Type="Int32" Nullable="false" />
+    <Property Name="student_github_account" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="student_info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="student_photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="student_gender_id" Type="Int32" Nullable="false" />
+    <Property Name="student_password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="student_cap_point" Type="Double" />
+    <Property Name="student_group_id" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Gender" Relationship="Self.FK_Students_To_Gender" FromRole="Students" ToRole="Gender" />
+    <NavigationProperty Name="Group" Relationship="Self.FK_Students_To_Group" FromRole="Students" ToRole="Groups" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_To_Students" FromRole="Students" ToRole="Tasks" />
+  </EntityType>
+  <EntityType Name="Task_Types">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="task_type_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="task_type_rate" Type="Double" Nullable="false" />
+    <NavigationProperty Name="Tasks" Relationship="Self.FK_Tasks_To_Task_Types" FromRole="Task_Types" ToRole="Tasks" />
+  </EntityType>
+  <EntityType Name="Task">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="task_type_id" Type="Int32" Nullable="false" />
+    <Property Name="task_start_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="task_end_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="task_point" Type="Int32" Nullable="false" />
+    <Property Name="task_source" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="task_note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="task_group_id" Type="Int32" />
+    <Property Name="task_student_id" Type="Int32" />
+    <NavigationProperty Name="Group" Relationship="Self.FK_Tasks_To_Group" FromRole="Tasks" ToRole="Groups" />
+    <NavigationProperty Name="Student" Relationship="Self.FK_Tasks_To_Students" FromRole="Tasks" ToRole="Students" />
+    <NavigationProperty Name="Task_Types" Relationship="Self.FK_Tasks_To_Task_Types" FromRole="Tasks" ToRole="Task_Types" />
+  </EntityType>
+  <EntityType Name="Teacher">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="teacher_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="teacher_surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="teacher_email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="teacher_phone" Type="Int32" Nullable="false" />
+    <Property Name="teacher_gender_id" Type="Int32" Nullable="false" />
+    <Property Name="teacher_password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="teacher_photo" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <NavigationProperty Name="Gender" Relationship="Self.FK_Teacher_To_Gender" FromRole="Teacher" ToRole="Gender" />
+    <NavigationProperty Name="Groups" Relationship="Self.FK_Groups_To_Teacher" FromRole="Teacher" ToRole="Groups" />
+  </EntityType>
+  <Association Name="FK_Mentors_To_Gender">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+    <End Role="Mentors" Type="Self.Mentor" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Mentors">
+        <PropertyRef Name="mentor_gender_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_To_Gender">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="student_gender_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Teacher_To_Gender">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Teacher">
+        <PropertyRef Name="teacher_gender_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Group_Types_To_Schedule">
+    <End Role="Group_Schedule" Type="Self.Group_Schedule" Multiplicity="1" />
+    <End Role="Group_Types" Type="Self.Group_Types" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_Schedule">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Group_Types">
+        <PropertyRef Name="group_schedule_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Groups_To_Group_Types">
+    <End Role="Group_Types" Type="Self.Group_Types" Multiplicity="1" />
+    <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Group_Types">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Groups">
+        <PropertyRef Name="group_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Groups_To_Teacher">
+    <End Role="Teacher" Type="Self.Teacher" Multiplicity="1" />
+    <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Teacher">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Groups">
+        <PropertyRef Name="group_teacher_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Groups_ToTable">
+    <End Role="Mentors" Type="Self.Mentor" Multiplicity="1" />
+    <End Role="Groups" Type="Self.Group" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mentors">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Groups">
+        <PropertyRef Name="group_mentor_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Students_To_Group">
+    <End Role="Groups" Type="Self.Group" Multiplicity="1" />
+    <End Role="Students" Type="Self.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="student_group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_To_Group">
+    <End Role="Groups" Type="Self.Group" Multiplicity="0..1" />
+    <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Groups">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="task_group_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_To_Students">
+    <End Role="Students" Type="Self.Student" Multiplicity="0..1" />
+    <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Students">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="task_student_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Tasks_To_Task_Types">
+    <End Role="Task_Types" Type="Self.Task_Types" Multiplicity="1" />
+    <End Role="Tasks" Type="Self.Task" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Task_Types">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tasks">
+        <PropertyRef Name="task_type_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Programing_StudentEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Genders" EntityType="Self.Gender" />
+    <EntitySet Name="Group_Schedule" EntityType="Self.Group_Schedule" />
+    <EntitySet Name="Group_Types" EntityType="Self.Group_Types" />
+    <EntitySet Name="Groups" EntityType="Self.Group" />
+    <EntitySet Name="Mentors" EntityType="Self.Mentor" />
+    <EntitySet Name="Settings" EntityType="Self.Setting" />
+    <EntitySet Name="Students" EntityType="Self.Student" />
+    <EntitySet Name="Task_Types" EntityType="Self.Task_Types" />
+    <EntitySet Name="Tasks" EntityType="Self.Task" />
+    <EntitySet Name="Teachers" EntityType="Self.Teacher" />
+    <AssociationSet Name="FK_Mentors_To_Gender" Association="Self.FK_Mentors_To_Gender">
+      <End Role="Gender" EntitySet="Genders" />
+      <End Role="Mentors" EntitySet="Mentors" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_To_Gender" Association="Self.FK_Students_To_Gender">
+      <End Role="Gender" EntitySet="Genders" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Teacher_To_Gender" Association="Self.FK_Teacher_To_Gender">
+      <End Role="Gender" EntitySet="Genders" />
+      <End Role="Teacher" EntitySet="Teachers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Group_Types_To_Schedule" Association="Self.FK_Group_Types_To_Schedule">
+      <End Role="Group_Schedule" EntitySet="Group_Schedule" />
+      <End Role="Group_Types" EntitySet="Group_Types" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Groups_To_Group_Types" Association="Self.FK_Groups_To_Group_Types">
+      <End Role="Group_Types" EntitySet="Group_Types" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Groups_To_Teacher" Association="Self.FK_Groups_To_Teacher">
+      <End Role="Teacher" EntitySet="Teachers" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Groups_ToTable" Association="Self.FK_Groups_ToTable">
+      <End Role="Mentors" EntitySet="Mentors" />
+      <End Role="Groups" EntitySet="Groups" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Students_To_Group" Association="Self.FK_Students_To_Group">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_To_Group" Association="Self.FK_Tasks_To_Group">
+      <End Role="Groups" EntitySet="Groups" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_To_Students" Association="Self.FK_Tasks_To_Students">
+      <End Role="Students" EntitySet="Students" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Tasks_To_Task_Types" Association="Self.FK_Tasks_To_Task_Types">
+      <End Role="Task_Types" EntitySet="Task_Types" />
+      <End Role="Tasks" EntitySet="Tasks" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

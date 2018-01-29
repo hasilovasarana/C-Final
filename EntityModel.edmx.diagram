@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="24ba8e93beba4858b20287ddb1940464" Name="Diagram1">
+        <EntityTypeShape EntityType="Programing_StudentModel1.Gender" Width="1.5" PointX="0.75" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Programing_StudentModel1.Group_Schedule" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Programing_StudentModel1.Group_Types" Width="1.5" PointX="3" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Programing_StudentModel1.Group" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Programing_StudentModel1.Mentor" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Programing_StudentModel1.Setting" Width="1.5" PointX="5.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Programing_StudentModel1.Student" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Programing_StudentModel1.Task_Types" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Programing_StudentModel1.Task" Width="1.5" PointX="9.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="Programing_StudentModel1.Teacher" Width="1.5" PointX="3" PointY="6" IsExpanded="true" />
+        <AssociationConnector Association="Programing_StudentModel1.FK_Mentors_To_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="Programing_StudentModel1.FK_Students_To_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="Programing_StudentModel1.FK_Teacher_To_Gender" ManuallyRouted="false" />
+        <AssociationConnector Association="Programing_StudentModel1.FK_Group_Types_To_Schedule" ManuallyRouted="false" />
+        <AssociationConnector Association="Programing_StudentModel1.FK_Groups_To_Group_Types" ManuallyRouted="false" />
+        <AssociationConnector Association="Programing_StudentModel1.FK_Groups_To_Teacher" ManuallyRouted="false" />
+        <AssociationConnector Association="Programing_StudentModel1.FK_Groups_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="Programing_StudentModel1.FK_Students_To_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="Programing_StudentModel1.FK_Tasks_To_Group" ManuallyRouted="false" />
+        <AssociationConnector Association="Programing_StudentModel1.FK_Tasks_To_Students" ManuallyRouted="false" />
+        <AssociationConnector Association="Programing_StudentModel1.FK_Tasks_To_Task_Types" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
